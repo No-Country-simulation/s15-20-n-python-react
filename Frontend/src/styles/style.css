@@ -1,19 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-a {
-  color: black;
-  text-decoration: none;
-}
-
-ul {
-  list-style: none;
-}
-
 .Landing {
   width: 100%;
   display: flex;
@@ -184,4 +169,22 @@ ul {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 12px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
 }/*# sourceMappingURL=style.css.map */

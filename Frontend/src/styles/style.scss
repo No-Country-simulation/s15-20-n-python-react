@@ -1,4 +1,10 @@
+@forward "./landing";
+@use "./variables" as var;
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   padding: 0;
@@ -6,12 +12,10 @@
   box-sizing: border-box;
 }
 
-// ######## Variables de Colores ########
-$white: white;
-$black: black;
+
 
 a {
-  color: $black;
+  color: var.$black;
   text-decoration: none;
 }
 
@@ -21,199 +25,3 @@ ul {
 
 // @import "algo";
 
-
-// ######## Landing ########
-.Landing {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Inter", sans-serif;
-}
-
-// ######## Landing -- Header ########
-.lHeader {
-  width: 90%;
-  padding: 67px 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid $black;
-
-  &__Logo, &__Nav {
-    font-size: 20px;
-    font-weight: 500;
-  }
-
-  &__Nav {
-    &--SignUp {
-      background-color: $black;
-      color: $white;
-      padding: 12px 24px;
-      margin-left: 24px;
-      border-radius: 8px;
-    }
-  }
-}
-
-.lSection1 {
-  width: 60%;
-  text-align: center;
-  padding: 92px 0;
-  h1 {
-    font-size: 64px;
-    font-weight: 700;
-    margin-bottom: 24px;
-  }
-  p {
-    font-size: 24px;
-    font-weight: 400;
-    color: #828282;
-    margin-bottom: 24px;
-
-  }
-  button {
-    background-color: $black;
-    color: $white;
-    padding: 12px 24px;
-    margin-left: 24px;
-    border-radius: 8px;
-    border: none;
-  }
-
-}
-
-
-.lSection2 {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 120px;
-
-  div {
-    width: 50%;
-    padding: 72px;
-    padding-bottom: 0;
-    h2 {
-      font-size: 40px;
-      margin-bottom: 24px;
-    }
-    p {
-      color: #828282;
-      font-size: 24px;
-      font-weight: 400;      
-    }
-  }
-
-  img {
-    width: 50%;
-    height: auto;
-  }
-}
-
-.flex-reverse {
-  flex-direction: row-reverse;
-}
-
-.lSection3 {
-  width: 90%;
-  margin-bottom: 120px;
-
-  h2 {
-    font-size: 40px;
-    margin-bottom: 36px;
-  }
-
-  &__list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    div {
-      width: calc(50% - 24px);
-      h3 {
-        font-size: 24px;
-        margin-bottom: 24px;
-      }
-      p {
-        color: #828282;
-        font-size: 20px;
-        font-weight: 500;
-        width: 80%;
-      }
-    }
-  }
-}
-
-.lSection4 {
-  width: 60%;
-  text-align: center;
-  padding: 92px 0;
-  h2 {
-    font-size: 40px;
-    margin-bottom: 24px;
-  }
-  p {
-    font-size: 24px;
-    font-weight: 400;
-    color: #828282;
-    margin-bottom: 24px;
-
-  }
-  button {
-    background-color: $black;
-    color: $white;
-    padding: 12px 24px;
-    margin-left: 24px;
-    border-radius: 8px;
-    border: none;
-  }
-
-}
-
-.lFooter {
-  width: 90%;
-  padding: 92px 0;
-  display: flex;
-  justify-content: space-between;
-
-  &__cont1 {
-    p {
-      font-size: 24px;
-      font-weight: 400;
-      margin-bottom: 100px;
-    }
-    ul {
-      display: flex;
-      li {
-        width: 20px;
-        height: 20px;
-        background-color: #8282825d;
-        border-radius: 50%;
-        margin-right: 12px;
-      }
-    }
-  }
-
-  &__cont2 {
-    display: flex;
-    padding-right: 60px;
-    gap: 24px 48px;
-
-    &__items {
-      p {
-        color: #454545;
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 18px;
-      }
-
-      ul li {
-        color: #454545;
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 12px; 
-      }
-
-    }
-  }
-}
