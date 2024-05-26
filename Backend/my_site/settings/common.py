@@ -31,7 +31,8 @@ INSTALLED_APPS = [
     'health.apps.HealthConfig',
     'users.apps.UsersConfig',
     'core',
-
+    'projects',
+    
     # 3rd party apps
     'rest_framework',
     'corsheaders',
@@ -120,7 +121,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+"""
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -138,4 +139,17 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
+}
+"""
+####ESTO LO ESTOY MODIFICANDO PARA PODER INGRESAR A LAS RUTAS SIN AUTENTICACION
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
