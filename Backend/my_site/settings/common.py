@@ -31,11 +31,17 @@ INSTALLED_APPS = [
     'health.apps.HealthConfig',
     'users.apps.UsersConfig',
     'core',
+    'projects',
     
     # 3rd party apps
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+
+    #prueba spectacular_settings:
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+}
 ]
 
 MIDDLEWARE = [
@@ -119,7 +125,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+"""
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -128,4 +134,29 @@ REST_FRAMEWORK = {
         ['rest_framework.authentication.TokenAuthentication'],
     'DEFAULT_PERMISSION_CLASSES':
         ['rest_framework.permissions.IsAdminUser']
+}
+"""
+####ESTO LO ESTOY MODIFICANDO PARA PODER INGRESAR A LAS RUTAS SIN AUTENTICACION
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # YOUR SETTINGS
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+
 }
