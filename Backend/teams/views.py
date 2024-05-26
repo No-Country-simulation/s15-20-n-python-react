@@ -13,8 +13,6 @@ class TeamList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Equipos'],
-        request=TeamSerializer,
-        responses=TeamSerializer,
         operation_id='Listado de Equipos',
         description='Listado de todos los Equipos',
     )
@@ -23,8 +21,6 @@ class TeamList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Equipos'],
-        request=TeamSerializer,
-        responses=TeamSerializer,
         operation_id='Creación de Equipo',
         description='Crea un nuevo Equipo',
     )
@@ -39,8 +35,6 @@ class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Equipos'],
-        request=TeamSerializer,
-        responses=TeamSerializer,
         operation_id='Muestra un Equipo especificado',
         description='Usado para mostrar el equipo especificado como parámetro en la URL.',
     )
@@ -49,8 +43,6 @@ class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Equipos'],
-        request=TeamSerializer,
-        responses=TeamSerializer,
         operation_id='Modificación del equipo especificado',
         description='Usado para modificar un equipo especificado como parámetro en la URL, debe proporcionar todos los valores del equipo.',
     )
@@ -59,8 +51,6 @@ class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Equipos'],
-        request=TeamSerializer,
-        responses=TeamSerializer,
         operation_id='Modificación parcial del equipo especificado',
         description='Modificación parcial del equipo especificado como parámetro en la URL. solo indique los valores que quiere modificar.',
     )
@@ -69,8 +59,6 @@ class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Equipos'],
-        request=TeamSerializer,
-        responses=TeamSerializer,
         operation_id='Eliminación del equipo especificado',
         description='Elimina el equipo especificado como parámetro en la URL.',
     )
@@ -85,8 +73,6 @@ class RoleTypeList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Roles'],
-        request=RoleTypeSerializer,
-        responses=RoleTypeSerializer,
         operation_id='Listado de Roles',
         description='Listado de todos los Roles',
     )
@@ -95,8 +81,6 @@ class RoleTypeList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Roles'],
-        request=RoleTypeSerializer,
-        responses=RoleTypeSerializer,
         operation_id='Creación de Roles',
         description='Crea un nuevo Rol',
     )
@@ -111,8 +95,6 @@ class RoleTypeDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Roles'],
-        request=RoleTypeSerializer,
-        responses=RoleTypeSerializer,
         operation_id='Muestra un Rol especificado',
         description='Usado para mostrar el equipo especificado como parámetro en la URL.',
     )
@@ -121,8 +103,6 @@ class RoleTypeDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Roles'],
-        request=RoleTypeSerializer,
-        responses=RoleTypeSerializer,
         operation_id='Modificación del Rol especificado',
         description='Usado para modificar un equipo especificado como parámetro en la URL, debe proporcionar todos los valores del equipo.',
     )
@@ -131,8 +111,6 @@ class RoleTypeDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Roles'],
-        request=RoleTypeSerializer,
-        responses=RoleTypeSerializer,
         operation_id='Modificación parcial del Rol especificado',
         description='Modificación parcial del equipo especificado como parámetro en la URL. solo indique los valores que quiere modificar.',
     )
@@ -141,8 +119,6 @@ class RoleTypeDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Roles'],
-        request=RoleTypeSerializer,
-        responses=RoleTypeSerializer,
         operation_id='Eliminación del Rol especificado',
         description='Elimina el equipo especificado como parámetro en la URL.',
     )
@@ -157,8 +133,6 @@ class CollaboratorList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Colaboradores'],
-        request=CollaboratorSerializer,
-        responses=CollaboratorSerializer,
         operation_id='Listado de Colaboradores',
         description='Listado de todos los Equipos',
     )
@@ -167,8 +141,6 @@ class CollaboratorList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Colaboradores'],
-        request=CollaboratorSerializer,
-        responses=CollaboratorSerializer,
         operation_id='Creación de Colaborador',
         description='Crea un nuevo Equipo',
     )
@@ -183,8 +155,6 @@ class CollaboratorDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Colaboradores'],
-        request=CollaboratorSerializer,
-        responses=CollaboratorSerializer,
         operation_id='Muestra un Colaborador especificado',
         description='Usado para mostrar el equipo especificado como parámetro en la URL.',
     )
@@ -193,8 +163,6 @@ class CollaboratorDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Colaboradores'],
-        request=CollaboratorSerializer,
-        responses=CollaboratorSerializer,
         operation_id='Modificación del Colaborador especificado',
         description='Usado para modificar un equipo especificado como parámetro en la URL, debe proporcionar todos los valores del equipo.',
     )
@@ -203,8 +171,6 @@ class CollaboratorDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Colaboradores'],
-        request=CollaboratorSerializer,
-        responses=CollaboratorSerializer,
         operation_id='Modificación parcial del Colaborador especificado',
         description='Modificación parcial del equipo especificado como parámetro en la URL. solo indique los valores que quiere modificar.',
     )
@@ -213,8 +179,6 @@ class CollaboratorDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Colaboradores'],
-        request=CollaboratorSerializer,
-        responses=CollaboratorSerializer,
         operation_id='Eliminación del Colaborador especificado',
         description='Elimina el equipo especificado como parámetro en la URL.',
     )

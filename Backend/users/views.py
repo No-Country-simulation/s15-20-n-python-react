@@ -16,8 +16,6 @@ class UserList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Usuarios'],
-        request=UserSerializer,
-        responses=UserSerializer,
         operation_id='Listado de Usuarios',
         description='Listado de todos los usuarios',
     )
@@ -26,8 +24,6 @@ class UserList(generics.ListCreateAPIView):
 
     @extend_schema(
         tags=['Usuarios'],
-        request=UserSerializer,
-        responses=UserSerializer,
         operation_id='Creación de Usuario',
         description='Adjunta un objeto con los valores indicados para crear un nuevo Usuario',
     )
@@ -41,8 +37,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Usuarios'],
-        request=UserSerializer,
-        responses=UserSerializer,
         operation_id='Muestra un usuario especificado',
         description='Usado para mostrar un usuario especificado como parámetro en la URL.',
     )
@@ -51,8 +45,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Usuarios'],
-        request=UserSerializer,
-        responses=UserSerializer,
         operation_id='Modificación del Usuario especificado.',
         description='Adjunta un objeto con los valores indicados para modificar un usuario especificado como parámetro en la URL, debe proporcionar en el cuerpo de la petición todos los valores del objeto usuario.',
     )
@@ -61,8 +53,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Usuarios'],
-        request=UserSerializer,
-        responses=UserSerializer,
         operation_id='Modificación de datos del Usuario especificado.',
         description='Adjunta un objeto con los valores indicados para modificar un usuario especificado como parámetro en la URL, debe proporcionar en el cuerpo de la petición solo los datos a modificar.',
     )
@@ -71,8 +61,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
     @extend_schema(
         tags=['Usuarios'],
-        request=UserSerializer,
-        responses=UserSerializer,
         operation_id='Borrado de Usuario especificado',
         description='Elimina el registro del usuario especificado como parámetro en la URL.',
     )
