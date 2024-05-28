@@ -3,21 +3,22 @@ from core.models import Project
 from projects.api.serializer import ProjectSerializer ,ProjectSerializerNew , ProjectSerializerCreate
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 
+
+@extend_schema(
+    tags=['Proyectos'], 
+    summary='Creación de un Proyecto', 
+    description='Crea un nuevo proyecto validando que el nombre no esté ya en uso por el usuario.'
+)
 class ProjectCreateView(generics.CreateAPIView):
-    """Creacion de un nuevo Proyecto (valida nombre si ya esta usado por el usuario)
-
-    Args:
-        'name' (str): Nombre del proyecto
-        'propietary' (pk): id del propietario (esto lo tengo que ver con validacion de usr)
-        'teams' (List): lista de equipo (required:False)
-        'collabs' (List): lista de colaboradores (required:False)
-
-    """
     queryset = Project.objects.all()
     serializer_class = ProjectSerializerCreate
     permission_classes = [permissions.IsAuthenticated]
+    
 
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
     
     def perform_create(self, serializer):
         # Verifica que el usuario esté autenticado
@@ -28,15 +29,25 @@ class ProjectCreateView(generics.CreateAPIView):
         
 
 
+
+@extend_schema(
+    tags=['Proyectos'], 
+    summary='Listado de Proyectos', 
+    description='Obtiene una lista de todos los proyectos pertenecientes al usuario autenticado.',
+)
 class ProjectListView(generics.ListAPIView):
-    """GET trae todos los projectos de la propiedad del usuario autenticado
-    """
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return Project.objects.filter(propietary=self.request.user)
 
+
+@extend_schema(
+    tags=['Proyectos'],
+    summary='Detalle de Proyecto',
+    description='Obtiene los detalles de un proyecto específico perteneciente al usuario autenticado.',
+)
 class ProjectDetailView(generics.RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
@@ -44,6 +55,7 @@ class ProjectDetailView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return Project.objects.filter(propietary=self.request.user)
+
 
 
 class ProjectUpdateView(generics.UpdateAPIView):
@@ -57,23 +69,33 @@ class ProjectUpdateView(generics.UpdateAPIView):
             raise PermissionDenied("No tiene permisos para modificar este Proyecto.")
         serializer.save()
 
-"""
-class ProjectDeleteView(generics.DestroyAPIView):
-    queryset = Project.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_destroy(self, instance):
-        if instance.propietary != self.request.user:
-            raise PermissionDenied("No eres el propietario para poder eliminar este Proyecto.")
-        instance.delete()
+    @extend_schema(
+    tags=['Proyectos'],
+    summary='Actualización de Proyecto',
+    description='Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.'
+    )
+    def put(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
     
-    def delete(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response({"detail": "Proyecto eliminado correctamente."}, status=status.HTTP_204_NO_CONTENT)
-""" 
+    @extend_schema(
+    tags=['Proyectos'],
+    summary='Actualización de Proyecto (parcial)',
+    description='Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.'
+    )
+    def patch(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+
+
+@extend_schema(
+    tags=['Proyectos'], 
+    summary='Eliminación de Proyecto', 
+    description='Elimina un proyecto específico perteneciente al usuario autenticado.'
+)
 class ProjectDeleteView(generics.DestroyAPIView):
     queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def destroy(self, request, *args, **kwargs):
