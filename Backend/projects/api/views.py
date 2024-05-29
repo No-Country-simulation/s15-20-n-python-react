@@ -1,11 +1,27 @@
 from rest_framework import generics, permissions, status
 from core.models import Project
-from projects.api.serializer import ProjectSerializer ,ProjectSerializerNew , ProjectSerializerCreate
+from projects.api.serializer import ProjectSerializer , ProjectSerializerCreate , ProjectSerializerUpdate
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
 
 
+############### REORGANIZADO DE CODIGO #################################
+
+### VIEW LISTA DE PROYECTOS : 
+@extend_schema(
+    tags=['Proyectos'], 
+    summary='Listado de Proyectos', 
+    description='Obtiene una lista de todos los proyectos pertenecientes al usuario autenticado.',
+)
+class ProjectListView(generics.ListAPIView):
+    serializer_class = ProjectSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Project.objects.filter(propietary=self.request.user)
+
+### VIEW CREACION DE PROYECTO
 @extend_schema(
     tags=['Proyectos'], 
     summary='Creación de un Proyecto', 
@@ -26,23 +42,8 @@ class ProjectCreateView(generics.CreateAPIView):
             serializer.save(propietary=self.request.user)
         else:
             raise serializer.ValidationError("El usuario debe estar autenticado para crear un proyecto.")
-        
 
-
-
-@extend_schema(
-    tags=['Proyectos'], 
-    summary='Listado de Proyectos', 
-    description='Obtiene una lista de todos los proyectos pertenecientes al usuario autenticado.',
-)
-class ProjectListView(generics.ListAPIView):
-    serializer_class = ProjectSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return Project.objects.filter(propietary=self.request.user)
-
-
+### VIEW DETALLE UN PROYECTO : 
 @extend_schema(
     tags=['Proyectos'],
     summary='Detalle de Proyecto',
@@ -56,11 +57,10 @@ class ProjectDetailView(generics.RetrieveAPIView):
     def get_queryset(self):
         return Project.objects.filter(propietary=self.request.user)
 
-
-
+### VIEW EDICION DE PROYECTO:
 class ProjectUpdateView(generics.UpdateAPIView):
     queryset = Project.objects.all()
-    serializer_class = ProjectSerializerNew
+    serializer_class = ProjectSerializerUpdate
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_update(self, serializer):
@@ -68,6 +68,7 @@ class ProjectUpdateView(generics.UpdateAPIView):
         if project.propietary != self.request.user:
             raise PermissionDenied("No tiene permisos para modificar este Proyecto.")
         serializer.save()
+        
 
     @extend_schema(
     tags=['Proyectos'],
@@ -75,7 +76,7 @@ class ProjectUpdateView(generics.UpdateAPIView):
     description='Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.'
     )
     def put(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+        return super().put(request, *args, **kwargs)
     
     @extend_schema(
     tags=['Proyectos'],
@@ -83,11 +84,9 @@ class ProjectUpdateView(generics.UpdateAPIView):
     description='Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.'
     )
     def patch(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+        return super().patch(request, *args, **kwargs)
 
-
-
-
+### VIEW ELIMINACION DE PROYECTO:
 @extend_schema(
     tags=['Proyectos'], 
     summary='Eliminación de Proyecto', 
