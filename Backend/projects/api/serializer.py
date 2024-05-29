@@ -15,10 +15,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 class ProjectSerializerCreate(serializers.ModelSerializer):
     teams = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all(), many=True)
     collabs = serializers.PrimaryKeyRelatedField(queryset=Collaborator.objects.all(), many=True)
+    status = serializers.CharField(source='get_status_display', read_only=True)
     
     class Meta:
         model = Project
-        fields = ['project_id', 'name', 'teams', 'collabs']
+        fields = ['project_id', 'name', 'teams', 'collabs', 'status']
 
     def validate_name(self,value):
         user = self.context['request'].user

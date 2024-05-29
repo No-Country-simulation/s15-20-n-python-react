@@ -46,13 +46,13 @@ class Collaborator(models.Model):
 
 class Project(models.Model):
     PLANNING = 'Planning'
-    IN_PROGRESS = 'In progress'
+    IN_PROGRESS = 'In_progress'
     COMPLETED = 'Completed'
     CANCELLED = 'Cancelled'
 
     STATUS_CHOICES = [
         (PLANNING, 'Planning'),
-        (IN_PROGRESS, 'In progress'),
+        (IN_PROGRESS, 'In_progress'),
         (COMPLETED, 'Completed'),
         (CANCELLED, 'Cancelled')
     ]

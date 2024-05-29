@@ -19,7 +19,11 @@ class ProjectListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Project.objects.filter(propietary=self.request.user)
+        status = self.kwargs.get('status')
+        if status:
+            return Project.objects.filter(propietary=self.request.user, status=status)
+        else:
+            return Project.objects.filter(propietary=self.request.user)
 
 ### VIEW CREACION DE PROYECTO
 @extend_schema(
