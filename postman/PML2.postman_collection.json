@@ -24,7 +24,38 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/project/my_projects/",
+							"raw": "http://127.0.0.1:8000/project",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My projects - Status",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/project/status/In_progress/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -35,7 +66,8 @@
 							"port": "8000",
 							"path": [
 								"project",
-								"my_projects",
+								"status",
+								"In_progress",
 								""
 							]
 						}
@@ -58,7 +90,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Project prueba nueva\"\r\n}",
+							"raw": "{\r\n    \"name\": \"este es el ultimo projecsdft que creo\",\r\n    \"teams\":[1],\r\n    \"collabs\":[]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -99,7 +131,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/project/my_project/17",
+							"raw": "http://127.0.0.1:8000/project/20",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -110,15 +142,57 @@
 							"port": "8000",
 							"path": [
 								"project",
-								"my_project",
-								"17"
+								"20"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "My project - Update",
+					"name": "My project - PUT",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bueno ahora si el ultdfgimos\",\r\n    \"teams\":[1],\r\n    \"collabs\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/project/20/update/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"project",
+								"20",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My project - PATCH",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -133,7 +207,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Proyecto de prueba desde rama \"\r\n}",
+							"raw": "{\r\n    \"status\":\"Completed\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -141,7 +215,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/project/my_project/update/17",
+							"raw": "http://127.0.0.1:8000/project/20/update/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -152,9 +226,9 @@
 							"port": "8000",
 							"path": [
 								"project",
-								"my_project",
+								"20",
 								"update",
-								"17"
+								""
 							]
 						}
 					},
@@ -184,7 +258,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/project/my_project/delete/9",
+							"raw": "http://127.0.0.1:8000/project/20/delete/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -195,9 +269,51 @@
 							"port": "8000",
 							"path": [
 								"project",
-								"my_project",
+								"20",
 								"delete",
-								"9"
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My project - Create2",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Project prueba nuev12\",\r\n    \"teams\":[1],\r\n    \"collabs\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/project/create2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"project",
+								"create2",
+								""
 							]
 						}
 					},
@@ -233,7 +349,8 @@
 									"\r",
 									"// Set the access token as an environment variable\r",
 									"pm.collectionVariables.set(\"AUTH_TOKEN\", accessToken);\r",
-									""
+									"\r",
+									"// superusuario: usuarioPM pass usuarioPM"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -254,7 +371,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"fsuarez\",\r\n    \"password\": \"J12p60ma\"\r\n}",
+							"raw": "{\r\n    \"username\": \"usuarioPM\",\r\n    \"password\": \"usuarioPM\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -274,6 +391,185 @@
 							"path": [
 								"user",
 								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usr Create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"usuario4\",\r\n    \"password\": \"usuario4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/list/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usr List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/user/list/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"user",
+								"list",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Team",
+			"item": [
+				{
+					"name": "team create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"pruebateams\",\r\n    \"members\": [1,2,3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/team/team/list/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"team",
+								"team",
+								"list",
 								""
 							]
 						}
