@@ -25,7 +25,9 @@ class ProjectListView(generics.ListAPIView):
 @extend_schema(
     tags=['Proyectos'], 
     summary='Creación de un Proyecto', 
-    description='Crea un nuevo proyecto validando que el nombre no esté ya en uso por el usuario.'
+    description=('Crea un nuevo proyecto validando que el nombre no esté ya en uso por el usuario.\n\n'
+    '**Status: se crea el proyecto con status Planning automaticamente**\n'
+    )
 )
 class ProjectCreateView(generics.CreateAPIView):
     queryset = Project.objects.all()
@@ -73,7 +75,14 @@ class ProjectUpdateView(generics.UpdateAPIView):
     @extend_schema(
     tags=['Proyectos'],
     summary='Actualización de Proyecto',
-    description='Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.'
+    description=(
+            'Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.\n\n'
+            '**Status:**\n'
+            '- `Planning`\n'
+            '- `In progress`\n'
+            '- `Completed`\n'
+            '- `Cancelled`\n'
+        ),
     )
     def put(self, request, *args, **kwargs):
         return super().put(request, *args, **kwargs)
@@ -81,7 +90,14 @@ class ProjectUpdateView(generics.UpdateAPIView):
     @extend_schema(
     tags=['Proyectos'],
     summary='Actualización de Proyecto (parcial)',
-    description='Actualiza los detalles de un proyecto específico perteneciente al usuario autenticado.'
+    description=(
+            'Actualiza los detalles parciales de un proyecto específico perteneciente al usuario autenticado.\n\n'
+            '**Status:**\n'
+            '- `Planning`\n'
+            '- `In progress`\n'
+            '- `Completed`\n'
+            '- `Cancelled`\n'
+        ),
     )
     def patch(self, request, *args, **kwargs):
         return super().patch(request, *args, **kwargs)

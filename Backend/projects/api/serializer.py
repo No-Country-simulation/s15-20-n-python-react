@@ -24,6 +24,7 @@ class ProjectSerializerCreate(serializers.ModelSerializer):
         user = self.context['request'].user
         if Project.objects.filter(name=value,propietary=user).exists():
             raise serializers.ValidationError("Ya tienen un proyecto con ese nombre")
+        
         return value
 
     def create(self, validated_data):
@@ -35,17 +36,15 @@ class ProjectSerializerCreate(serializers.ModelSerializer):
         if collabs_data:
             project.collabs.set(collabs_data)
         return project
-    
 
 ### Serializador de proyectos edicion de proyectos
-
 class ProjectSerializerUpdate(serializers.ModelSerializer):
     teams = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all(), many=True)
     collabs = serializers.PrimaryKeyRelatedField(queryset=Collaborator.objects.all(), many=True)
 
     class Meta:
         model = Project
-        fields = ['project_id', 'name', 'teams', 'collabs']
+        fields = ['project_id', 'name', 'teams', 'collabs','status']
         extra_kwargs = {
             'teams': {'required': False},
             'collabs': {'required': False},

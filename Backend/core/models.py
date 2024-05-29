@@ -27,6 +27,7 @@ class RoleType(models.Model):
 # Model for labels of tasks
 
 
+
 class LabelTask(models.Model):
     label_text = models.CharField(max_length=100)
 
@@ -44,12 +45,28 @@ class Collaborator(models.Model):
 
 
 class Project(models.Model):
+    PLANNING = 'Planning'
+    IN_PROGRESS = 'In progress'
+    COMPLETED = 'Completed'
+    CANCELLED = 'Cancelled'
+
+    STATUS_CHOICES = [
+        (PLANNING, 'Planning'),
+        (IN_PROGRESS, 'In progress'),
+        (COMPLETED, 'Completed'),
+        (CANCELLED, 'Cancelled')
+    ]
+
     project_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     teams = models.ManyToManyField(Team)
     propietary = models.ForeignKey(User, on_delete=models.CASCADE)
     collabs = models.ManyToManyField(Collaborator)
-
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default=PLANNING,
+    )
 
 class Board(models.Model):
     board_id = models.AutoField(primary_key=True)
