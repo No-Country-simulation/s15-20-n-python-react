@@ -171,6 +171,129 @@
   margin-bottom: 12px;
 }
 
+.Register {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding-bottom: 40px;
+}
+.Register__welcome {
+  padding-top: 102px;
+  padding-bottom: 40px;
+}
+.Register__welcome p {
+  text-align: center;
+  color: #344054;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.96px;
+}
+.Register__welcome p:first-child {
+  font-size: 40px;
+  letter-spacing: 0.4px;
+  margin-bottom: 24px;
+}
+.Register__plataform {
+  width: 320px;
+  padding: 24px 0;
+  text-align: center;
+}
+.Register__plataform p {
+  margin-bottom: 12px;
+}
+.Register__plataform button {
+  display: flex;
+  width: 100%;
+  height: 42px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 21px;
+  background: #232323;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 24px;
+}
+.Register__link {
+  display: flex;
+  margin-bottom: 24px;
+}
+.Register__link p {
+  color: #344054;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.48px;
+  margin-right: 8px;
+}
+.Register__link a {
+  font-size: 14px;
+  font-style: bold;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.Register__benefits {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+.Register__benefits div {
+  width: 30%;
+  display: flex;
+  align-items: center;
+}
+.Register__benefits div p {
+  color: #323131;
+  font-size: 12px;
+  font-weight: 400;
+}
+.Register__benefits div img {
+  margin-right: 8px;
+}
+.Register--conditions {
+  color: #344054;
+}
+.Register--conditions span {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form--group {
+  width: 660px;
+  margin-bottom: 24px;
+}
+.form--group label {
+  color: #344054;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.48px;
+}
+.form--group input {
+  width: 100%;
+  margin-top: 12px;
+  height: 52px;
+  padding: 14px 17px;
+  border: 1px solid rgba(52, 64, 84, 0.2745098039);
+  border-radius: 10px;
+}
+.form button {
+  width: 660px;
+  height: 48px;
+  border-radius: 8px;
+  background: #787486;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #F4CA8D;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.54px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
