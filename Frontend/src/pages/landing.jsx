@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import img1 from "../assets/img/template-img1.webp"
 import img2 from "../assets/img/template-img2.webp"
 
@@ -13,8 +14,8 @@ const Landing = () => {
           </div>
 
           <div className="lHeader__Nav">
-            <a href="http://">Log In</a>
-            <a className="lHeader__Nav--SignUp" href="http://">Sign Up</a>
+            <Link to={"/auth/login"}>Log In</Link>
+            <Link className="lHeader__Nav--SignUp" to={"/auth/register"}>Sign Up</Link>
           </div>
 
         </header>
