@@ -3,7 +3,7 @@ import { Search } from "./search"
 
 export const Header = () => {
     return (
-        <header className="header w-4/5 ms-auto h-20 flex items-center justify-between">
+        <header className="header w-10/12 ms-auto h-20 flex items-center justify-between">
             <div className="flex items-center justify-between px-10 gap-4">
                 <Menu 
                     image={<svg width="24" height="24" viewBox="0 0 13 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,8 +32,8 @@ export const Header = () => {
             <div className="flex items-center justify-between pe-10">
                 <Search />
                 <div className="flex items-center justify-around mx-4">
-                    <img src="../assets/img/bell.png" alt="bell" />
-                    <img src="../assets/img/mesh.png" alt="user" />
+                    <img src="../src/assets/img/bell.png" alt="bell" />
+                    <img src="../src/assets/img/mesh.png" alt="user" />
                 </div>
             </div>
         </header>
