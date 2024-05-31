@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from core.models import File, Task
+from core.models import Comment, Task
 
 
 class FileSerializer(serializers.Serializer):
     class Meta:
-        model = File
+        model = Comment
         fields = ['title', 'link']
         
 class TaskSerializer(serializers.Serializer):

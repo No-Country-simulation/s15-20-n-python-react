@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from comments.serializers import FileSerializer, TaskSerializer
-from core.models import File, Task
+from core.models import Comment, Task
 from drf_spectacular.utils import extend_schema
 from cloudinary import uploader
 from cloudinary import api
@@ -38,7 +38,7 @@ class FileView(generics.ListCreateAPIView):
 
 class FileDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.AllowAny, )
-    queryset = File.objects.all()
+    queryset = Comment.objects.all()
     serializer_class = FileSerializer
 
     @extend_schema(

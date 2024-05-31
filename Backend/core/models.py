@@ -30,18 +30,21 @@ class RoleType(models.Model):
 
 class LabelTask(models.Model):
     label_text = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
 
 
 class Team(models.Model):
     team_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     members = models.ManyToManyField(User)
+    is_active = models.BooleanField(default=True)
 
 
 class Collaborator(models.Model):
     collab_id = models.AutoField(primary_key=True)
     role = models.ForeignKey(RoleType, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
 
 class Project(models.Model):
@@ -67,11 +70,13 @@ class Project(models.Model):
         choices=STATUS_CHOICES,
         default=PLANNING,
     )
+    is_active = models.BooleanField(default=True)
 
 class Board(models.Model):
     board_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     membership_project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
 
 class TasksList(models.Model):
@@ -79,6 +84,7 @@ class TasksList(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
     membership_board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
 
 class Task(models.Model):
@@ -89,17 +95,14 @@ class Task(models.Model):
     expiration_at = models.DateField(blank=True, null=True)
     labels = models.ManyToManyField(LabelTask)
     assigned_users = models.ManyToManyField(User)
+    is_active = models.BooleanField(default=True)
 
 
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text_comment = models.TextField(max_length=500)
+    file_link = models.CharField(max_length=300, default='https://cloudinary.com')
     commented_task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
-
-class File(models.Model):
-    file_id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100)
-    link = models.CharField(max_length=300)
-    associate_task = models.ForeignKey(Task, on_delete=models.CASCADE)
