@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions
-from files.serializers import FileSerializer, TaskSerializer
+from comments.serializers import FileSerializer, TaskSerializer
 from core.models import File, Task
 from drf_spectacular.utils import extend_schema
 from cloudinary import uploader

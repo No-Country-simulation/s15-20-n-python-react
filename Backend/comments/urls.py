@@ -1,5 +1,5 @@
 from django.urls import path
-from files.views import FileDetail
+from comments.views import FileDetail
 
 
 urlpatterns = [
