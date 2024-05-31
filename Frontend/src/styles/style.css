@@ -294,6 +294,10 @@
   letter-spacing: 0.54px;
 }
 
+.header {
+  background-color: #000714;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -310,4 +314,6 @@ a {
 
 ul {
   list-style: none;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
