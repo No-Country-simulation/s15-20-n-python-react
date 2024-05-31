@@ -14,6 +14,15 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://localhost:3000',
+    'https://127.0.0.1:3000',
+    'https://s15-20-n-python-react-1.onrender.com'
+]
+
 # SECURITY WARNING: update this when you have the production host
 ALLOWED_HOSTS = ['localhost', '127.0.0.1',
                  's15-20-n-python-react.onrender.com']
