@@ -101,8 +101,8 @@ class Task(models.Model):
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text_comment = models.TextField(max_length=500)
-    file_link = models.CharField(max_length=300, default='https://cloudinary.com')
+    text_comment = models.TextField(max_length=500, blank=True, null=True)
+    file_link = models.CharField(max_length=300, blank=True, null=True)
     commented_task = models.ForeignKey(Task, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
