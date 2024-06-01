@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from tasks.serializers import TaskSerializer, CommentSerializer
-from core.models import Task, Comment
+from tasks.serializers import TaskSerializer
+from core.models import Task
 from drf_spectacular.utils import extend_schema
 
 # Create your views here.
