@@ -8,39 +8,73 @@ User = get_user_model()
 
 
 class RoleType(models.Model):
-    EDITOR = 'editor'
-    COMMENTATOR = 'commentator'
-    READER = 'reader'
-
-    ROLE_CHOICES = [
-        (EDITOR, 'Editor'),
-        (COMMENTATOR, 'Comentarista'),
-        (READER, 'Lector'),
-    ]
+    ROLE_CHOICES = {
+        'EDITOR': 'Editor', 'COMMENTATOR': 'Comentarista', 'READER': 'Lector'
+    }
 
     role_type = models.CharField(
         max_length=20,
         choices=ROLE_CHOICES,
-        default=READER,
+        default='READER',
     )
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.role_type
+
+    class Meta:
+        verbose_name = 'Rol'
+        verbose_name_plural = 'Roles'
+        ordering = ['role_type']
 
 # Model for labels of tasks
 
 
 class LabelTask(models.Model):
     label_text = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.label_text
+
+    class Meta:
+        verbose_name = 'Etiqueta'
+        verbose_name_plural = 'Etiquetas'
+        ordering = ['label_text']
 
 
 class Team(models.Model):
     team_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     members = models.ManyToManyField(User)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Equipo'
+        verbose_name_plural = 'Equipos'
+        ordering = ['name']
 
 
 class Collaborator(models.Model):
     collab_id = models.AutoField(primary_key=True)
     role = models.ForeignKey(RoleType, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user
+
+    class Meta:
+        verbose_name = 'Colaborador'
+        verbose_name_plural = 'Colaboradores'
+        ordering = ['user']
 
 
 class Project(models.Model):
@@ -49,12 +83,32 @@ class Project(models.Model):
     teams = models.ManyToManyField(Team)
     propietary = models.ForeignKey(User, on_delete=models.CASCADE)
     collabs = models.ManyToManyField(Collaborator)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Proyecto'
+        verbose_name_plural = 'Proyectos'
+        ordering = ['name', 'propietary']
 
 
 class Board(models.Model):
     board_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     membership_project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Tablero'
+        verbose_name_plural = 'Tableros'
+        ordering = ['title']
 
 
 class TasksList(models.Model):
@@ -62,6 +116,16 @@ class TasksList(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
     membership_board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Lista de Tareas'
+        verbose_name_plural = 'Listas de Tareas'
+        ordering = ['title']
 
 
 class Task(models.Model):
@@ -72,6 +136,16 @@ class Task(models.Model):
     expiration_at = models.DateField(blank=True, null=True)
     labels = models.ManyToManyField(LabelTask)
     assigned_users = models.ManyToManyField(User)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Tarea'
+        verbose_name_plural = 'Tareas'
+        ordering = ['title']
 
 
 class Comment(models.Model):
@@ -79,6 +153,16 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text_comment = models.TextField(max_length=500)
     commented_task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user
+
+    class Meta:
+        verbose_name = 'Comentario'
+        verbose_name_plural = 'Comentarios'
+        ordering = ['user']
 
 
 class File(models.Model):
@@ -86,3 +170,13 @@ class File(models.Model):
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=300)
     associate_task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Archivo'
+        verbose_name_plural = 'Archivos'
+        ordering = ['title']

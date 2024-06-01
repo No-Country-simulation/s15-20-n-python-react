@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from teams.serializers import TeamSerializer, RoleTypeSerializer, CollaboratorSerializer
 from core.models import Team, RoleType, Collaborator
 from drf_spectacular.utils import extend_schema
@@ -10,6 +10,8 @@ class TeamList(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
     @extend_schema(
         tags=['Equipos'],
@@ -26,6 +28,16 @@ class TeamList(generics.ListCreateAPIView):
     )
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        queryset = Team.objects.all()
+        param = self.request.query_params.get("is_active")
+
+        if param == "true":
+            queryset = queryset.filter(is_active=True)
+        elif param == "false":
+            queryset = queryset.filter(is_active=False)
+        return queryset
 
 
 class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -70,6 +82,8 @@ class RoleTypeList(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = RoleType.objects.all()
     serializer_class = RoleTypeSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
     @extend_schema(
         tags=['Roles'],
@@ -86,6 +100,16 @@ class RoleTypeList(generics.ListCreateAPIView):
     )
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        queryset = RoleType.objects.all()
+        param = self.request.query_params.get("is_active")
+
+        if param == "true":
+            queryset = queryset.filter(is_active=True)
+        elif param == "false":
+            queryset = queryset.filter(is_active=False)
+        return queryset
 
 
 class RoleTypeDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -130,6 +154,8 @@ class CollaboratorList(generics.ListCreateAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = Collaborator.objects.all()
     serializer_class = CollaboratorSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name"]
 
     @extend_schema(
         tags=['Colaboradores'],
@@ -146,6 +172,16 @@ class CollaboratorList(generics.ListCreateAPIView):
     )
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+    def get_queryset(self):
+        queryset = Collaborator.objects.all()
+        param = self.request.query_params.get("is_active")
+
+        if param == "true":
+            queryset = queryset.filter(is_active=True)
+        elif param == "false":
+            queryset = queryset.filter(is_active=False)
+        return queryset
 
 
 class CollaboratorDetail(generics.RetrieveUpdateDestroyAPIView):
