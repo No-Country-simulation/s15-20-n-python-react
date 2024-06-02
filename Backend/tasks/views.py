@@ -10,7 +10,7 @@ class TaskList(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
 
     @extend_schema(
-        tags=['Tasks'],
+        tags=['tareas'],
         operation_id='creacion de tareas',
         description='Se crea una nueva tarea',
     )
@@ -18,7 +18,7 @@ class TaskList(generics.ListCreateAPIView):
         return self.create(request, *args, **kwargs)    
     
     @extend_schema(
-        tags=['Tasks'],
+        tags=['tareas'],
         operation_id='listado de tareas',
         description='Se listan todas las tareas',
     )
@@ -31,7 +31,15 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TaskSerializer
 
     @extend_schema(
-        tags=['Tasks'],
+        tags=['tareas'],
+        operation_id='obtener tarea',
+        description='Se obtiene una tarea',
+    )
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    @extend_schema(
+        tags=['tareas'],
         operation_id='actualizar tarea',
         description='Se actualiza una tarea',
     )
@@ -39,7 +47,7 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
         return self.update(request, *args, **kwargs)
 
     @extend_schema(
-        tags=['Tasks'],
+        tags=['tareas'],
         operation_id='actualizar parcialmente tarea',
         description='Se actualiza parcialmente una tarea',
     )
@@ -47,7 +55,7 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
         return self.partial_update(request, *args, **kwargs)
 
     @extend_schema(
-        tags=['Tasks'],
+        tags=['tareas'],
         operation_id='borrar tarea',
         description='Se elimina una tarea',
     )
