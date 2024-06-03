@@ -1,13 +1,19 @@
 from rest_framework import serializers
 from core.models import Comment, Task
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
-class FileSerializer(serializers.Serializer):
+class CommentSerializerGet(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['title', 'link']
-        
-class TaskSerializer(serializers.Serializer):
+        fields = '__all__'
+
+class CommentSerializerPost(serializers.Serializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    commented_task = serializers.PrimaryKeyRelatedField(queryset=Task.objects.all())
     class Meta:
-        model = Task
-        fields = ['title']
+        model = Comment
+        fields = ['user', 'text_comment', 'file_link', 'commented_task']
+        

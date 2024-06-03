@@ -1,28 +1,30 @@
 from rest_framework import generics, permissions
-from comments.serializers import FileSerializer, TaskSerializer
+from comments.serializers import CommentSerializerGet, CommentSerializerPost
 from core.models import Comment, Task
 from drf_spectacular.utils import extend_schema
 from cloudinary import uploader
 from cloudinary import api
 
-class FileView(generics.ListCreateAPIView):
+class FileViewList(generics.ListAPIView):
     
     @extend_schema(
         tags=['Archivos'],
-        request=FileSerializer,
-        responses=FileSerializer,
-        operation_id='Muestra el listado de archivos',
-        description='Usado para mostrar los archivos de la tarea especificada como parámetro en la URL.',
+        request=CommentSerializerGet,
+        responses=CommentSerializerGet,
+        operation_id='Muestra el listado de comentarios',
+        description='Usado para mostrar los comentarios de la tarea especificada como parámetro en la URL.',
     )
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
     
+class FileViewCreate(generics.CreateAPIView):
+    
     @extend_schema(
         tags=['Archivos'],
-        request=FileSerializer,
-        responses=FileSerializer,
-        operation_id='Guarda un Archivo cargado',
-        description='Usado para guardar el archivo de la ruta especificada como parámetro en la URL.',
+        request=CommentSerializerPost,
+        responses=CommentSerializerPost,
+        operation_id='Guarda un comentario cargado',
+        description='Usado para guardar el comentario da la tarea que recibe como parámetro en la URL.',
     )
     def post(self, request, *args, **kwargs):
         file = request.files['file']
@@ -36,6 +38,7 @@ class FileView(generics.ListCreateAPIView):
         file_url = file_uploaded['secure_url']
         return self.create(request, *args, **kwargs)
 
+"""
 class FileDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = Comment.objects.all()
@@ -60,3 +63,4 @@ class FileDetail(generics.RetrieveUpdateDestroyAPIView):
     )
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+"""
