@@ -4,7 +4,6 @@ from projects.api.views import ProjectCreateView, ProjectUpdateView, ProjectDeta
 
 urlpatterns = [
     path('', ProjectListView.as_view(), name='project-list'), #ok
-    path('status/<str:status>/', ProjectListView.as_view(), name='project-list'), #ok
     path('create/', ProjectCreateView.as_view(), name='project-create'), #ok
     path('<int:pk>/', ProjectDetailView.as_view(), name='project-detail'),# ok
     path('<int:pk>/update/', ProjectUpdateView.as_view(), name='project-update'), #ok

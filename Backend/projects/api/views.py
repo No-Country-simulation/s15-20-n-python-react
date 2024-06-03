@@ -1,9 +1,10 @@
-from rest_framework import generics, permissions, status
+from rest_framework import generics, permissions, status, filters
 from core.models import Project
 from projects.api.serializer import ProjectSerializer , ProjectSerializerCreate , ProjectSerializerUpdate
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
+
 
 
 ############### REORGANIZADO DE CODIGO #################################
@@ -17,9 +18,11 @@ from drf_spectacular.utils import extend_schema
 class ProjectListView(generics.ListAPIView):
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
+    search_field = ["status"]
 
     def get_queryset(self):
-        status = self.kwargs.get('status')
+        status = self.request.GET.get('status')
         if status:
             return Project.objects.filter(propietary=self.request.user, status=status)
         else:
@@ -117,7 +120,7 @@ class ProjectDeleteView(generics.DestroyAPIView):
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def destroy(self, request, *args, **kwargs):
+    def destroy(self, request, *args, **kwargs): #modifico el metodo para que lo ponga en false en is_active
         instance = self.get_object()
         if instance.propietary != self.request.user:
             raise PermissionDenied("No eres el propietario para poder eliminar este Proyecto.")
