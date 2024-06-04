@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, status, filters
+from rest_framework import generics, permissions
 from core.models import Project
 from projects.api.serializer import ProjectSerializer , ProjectSerializerCreate , ProjectSerializerUpdate
 from rest_framework.exceptions import PermissionDenied
