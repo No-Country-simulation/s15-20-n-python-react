@@ -1,5 +1,6 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from board.api.serializer import BoardSerializer , BoardSerializerCreate
+from rest_framework.response import Response
 from core.models import Board
 
 class BoardApiListView(generics.ListAPIView):
@@ -8,6 +9,7 @@ class BoardApiListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Board.objects.filter(is_active=True)
+        #return Board.objects.all()
 
 
 class BoardApiCreateView(generics.CreateAPIView):
@@ -17,3 +19,15 @@ class BoardApiCreateView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+    
+
+class BoardApiDestroyView(generics.DestroyAPIView):
+    queryset = Board.objects.all()
+    serializer_class = BoardSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_active = False
+        instance.save()
+        return Response({"detail": "tablero eliminado correctamente."}, status=status.HTTP_204_NO_CONTENT)
