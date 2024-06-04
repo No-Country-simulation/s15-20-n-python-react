@@ -9,11 +9,20 @@ class BoardSerializer(serializers.ModelSerializer):
 
     def get_queryset(self):
         return Board.objects.filter(is_active=True)
+        
 
 
 class BoardSerializerCreate(serializers.ModelSerializer):
     class Meta:
         model = Board
-        fields = ['title', 'membership_project']
+        fields = ['board_id', 'title', 'membership_project']
+
+
+    def validate_title(self, value):
+        membership_project = self.context['request'].data.get('membership_project')
+        if Board.objects.filter(title=value, membership_project=membership_project).exists():
+            raise serializers.ValidationError("Ya existe un tablero con ese nombre en el proyecto")
+        return value
+
 
 
