@@ -2,7 +2,16 @@ from rest_framework import generics, permissions, status
 from board.api.serializer import BoardSerializer , BoardSerializerCreate
 from rest_framework.response import Response
 from core.models import Board
+from drf_spectacular.utils import extend_schema
 
+
+@extend_schema(
+    tags=['Board'],
+    summary='Lista Board (todos, y si se agrega /board?id_project=X trae solo las board del proyecto X)',
+    description=(
+            'Lista Board (todos, y si se agrega /board?id_project=X trae solo las board del proyecto X)'
+        ),
+    )
 class BoardApiListView(generics.ListAPIView):
     serializer_class = BoardSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -15,7 +24,14 @@ class BoardApiListView(generics.ListAPIView):
             return Board.objects.filter(is_active=True)
         #return Board.objects.all()
 
-
+@extend_schema(
+    tags=['Board'],
+    summary='Creación de una Board', 
+    description=('Crea una nueva Board.\n\n'
+    'Crea una nueva board. datos solicitados:\n'
+    '[title, membership_project]\n'
+    )
+)
 class BoardApiCreateView(generics.CreateAPIView):
     queryset = Board.objects.all()
     serializer_class = BoardSerializerCreate
@@ -25,6 +41,13 @@ class BoardApiCreateView(generics.CreateAPIView):
         return self.create(request, *args, **kwargs)
     
 
+
+@extend_schema(
+    tags=['Board'],
+    summary='Eliminacion de una Board', 
+    description=('Cambia estado is_active a False.\n\n'
+    )
+)
 class BoardApiDestroyView(generics.DestroyAPIView):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
