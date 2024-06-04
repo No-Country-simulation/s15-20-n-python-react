@@ -64,8 +64,23 @@ class BoardApiUpdateView(generics.UpdateAPIView):
     serializer_class = BoardSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    
     def perform_update(self, serializer):
         serializer.save()
-
+    @extend_schema(
+    tags=['Board'],
+    summary='UPDATE board', 
+    description=('Actualizacion de.\n\n'
+    )
+    )
     def put(self, request, *args, **kwargs):
         return super().put(request, *args, **kwargs)
+    
+    @extend_schema(
+    tags=['Board'],
+    summary='UPDATE board parcial', 
+    description=('Actualizacion de.\n\n'
+    )
+    )
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
