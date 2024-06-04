@@ -13,20 +13,21 @@ from drf_spectacular.utils import extend_schema
 @extend_schema(
     tags=['Proyectos'], 
     summary='Listado de Proyectos', 
-    description='Obtiene una lista de todos los proyectos pertenecientes al usuario autenticado.',
+    description='Obtiene una lista de todos los proyectos pertenecientes al usuario autenticado. , ejemplo filtrado : project?status=Planning ',
 )
 class ProjectListView(generics.ListAPIView):
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [filters.SearchFilter]
-    search_field = ["status"]
+    #filter_backends = [filters.SearchFilter]
+    #search_field = ["status"]
+    
 
     def get_queryset(self):
         status = self.request.GET.get('status')
         if status:
-            return Project.objects.filter(propietary=self.request.user, status=status)
+            return Project.objects.filter(propietary=self.request.user, status=status, is_active=True)
         else:
-            return Project.objects.filter(propietary=self.request.user)
+            return Project.objects.filter(propietary=self.request.user,is_active=True)
 
 ### VIEW CREACION DE PROYECTO
 @extend_schema(
@@ -64,7 +65,7 @@ class ProjectDetailView(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Project.objects.filter(propietary=self.request.user)
+        return Project.objects.filter(propietary=self.request.user,is_active=True)
 
 ### VIEW EDICION DE PROYECTO:
 class ProjectUpdateView(generics.UpdateAPIView):
@@ -124,5 +125,9 @@ class ProjectDeleteView(generics.DestroyAPIView):
         instance = self.get_object()
         if instance.propietary != self.request.user:
             raise PermissionDenied("No eres el propietario para poder eliminar este Proyecto.")
-        self.perform_destroy(instance)
+        instance.is_active = False
+        instance.save()
         return Response({"detail": "Proyecto eliminado correctamente."}, status=status.HTTP_204_NO_CONTENT)
+
+
+    ###    board!!!

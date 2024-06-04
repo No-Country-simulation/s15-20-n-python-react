@@ -19,7 +19,7 @@ class ProjectSerializerCreate(serializers.ModelSerializer):
     
     class Meta:
         model = Project
-        fields = ['project_id', 'name', 'teams', 'collabs', 'status']
+        fields = ['project_id', 'name', 'teams', 'collabs', 'status','is_active']
 
     def validate_name(self,value):
         user = self.context['request'].user
