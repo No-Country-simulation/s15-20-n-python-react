@@ -78,6 +78,18 @@ class Collaborator(models.Model):
 
 
 class Project(models.Model):
+    PLANNING = 'Planning'
+    IN_PROGRESS = 'In_progress'
+    COMPLETED = 'Completed'
+    CANCELLED = 'Cancelled'
+
+    STATUS_CHOICES = [
+        (PLANNING, 'Planning'),
+        (IN_PROGRESS, 'In_progress'),
+        (COMPLETED, 'Completed'),
+        (CANCELLED, 'Cancelled')
+    ]
+
     project_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     teams = models.ManyToManyField(Team)
