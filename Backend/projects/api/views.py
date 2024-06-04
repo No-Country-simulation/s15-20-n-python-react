@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, status
 from core.models import Project
-from projects.api.serializer import ProjectSerializer , ProjectSerializerCreate , ProjectSerializerUpdate
+from projects.api.serializer import ProjectSerializerCreate 
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema
