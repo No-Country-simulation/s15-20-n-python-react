@@ -8,7 +8,11 @@ class BoardApiListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Board.objects.filter(is_active=True)
+        id_project = self.request.GET.get('id_project')
+        if id_project:
+            return Board.objects.filter(is_active=True,membership_project=id_project)
+        else:
+            return Board.objects.filter(is_active=True)
         #return Board.objects.all()
 
 
@@ -31,3 +35,14 @@ class BoardApiDestroyView(generics.DestroyAPIView):
         instance.is_active = False
         instance.save()
         return Response({"detail": "tablero eliminado correctamente."}, status=status.HTTP_204_NO_CONTENT)
+    
+class BoardApiUpdateView(generics.UpdateAPIView):
+    queryset = Board.objects.all()
+    serializer_class = BoardSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
