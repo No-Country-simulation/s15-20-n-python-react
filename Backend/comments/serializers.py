@@ -15,5 +15,5 @@ class CommentSerializerPost(serializers.Serializer):
     commented_task = serializers.PrimaryKeyRelatedField(queryset=Task.objects.all())
     class Meta:
         model = Comment
-        fields = ['user', 'text_comment', 'file_link', 'commented_task']
+        fields = ['user', 'text_comment', 'commented_task']
         
