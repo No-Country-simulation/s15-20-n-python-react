@@ -34,7 +34,10 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'core',
     'projects',
+    'board',
+    'lists',
     'comments',
+    
     
     # 3rd party apps
     'rest_framework',
