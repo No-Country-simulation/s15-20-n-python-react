@@ -24,7 +24,7 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('team/', include('teams.urls')),
     path('project/',include('projects.api.urls')),
-    path('task/comments/', include('comments.urls')),
+    path('comment/', include('comments.urls')),
     path('board/',include('board.api.urls')),
     path('tasklist/', include('lists.api.urls')),
     # DRF-Spectacular path

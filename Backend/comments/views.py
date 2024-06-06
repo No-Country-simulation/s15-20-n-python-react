@@ -5,7 +5,8 @@ from drf_spectacular.utils import extend_schema
 from cloudinary import uploader
 from cloudinary import api
 
-class CommentAPIViewList(generics.ListAPIView):
+class CommentAPIView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
     
     @extend_schema(
         tags=['Comentarios'],
@@ -13,9 +14,8 @@ class CommentAPIViewList(generics.ListAPIView):
         description='Usado para mostrar los comentarios de la tarea especificada como parámetro en la URL.',
     )
     def get(self, request, *args, **kwargs):
+        serializer_class = CommentSerializerGet
         return self.list(request, *args, **kwargs)
-    
-class CommentAPIViewCreate(generics.CreateAPIView):
     
     @extend_schema(
         tags=['Comentarios'],
@@ -23,14 +23,11 @@ class CommentAPIViewCreate(generics.CreateAPIView):
         description='Usado para guardar el comentario da la tarea que recibe como parámetro en la URL.',
     )
     def post(self, request, *args, **kwargs):
-        queryset = Comment.objects.all()
         serializer_class = CommentSerializerPost
-        
         return self.create(request, *args, **kwargs)
 
         
     def perform_create(self, serializer):
-        # Verifica que el usuario esté autenticado
         
         if self.request.file:
             file = self.request.file
@@ -45,35 +42,50 @@ class CommentAPIViewCreate(generics.CreateAPIView):
             serializer.save(file_link=file_url)
         else:
             pass
+    
 
-class CommentAPIViewDelete(generics.DestroyAPIView):
-        queryset = Comment.objects.all()
-        
-        def delete(self, request, *args, **kwargs):
-            instance = self.get_object()
-            if instance.is_active:
-                instance.is_active = False
-                instance.save()
-                return instance
-            else:
-                return("Comment not found")
-            
-
-"""
-class FileDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.AllowAny, )
+class CommentDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
-    serializer_class = FileSerializer
-
+    
     @extend_schema(
-        tags=['Archivos'],
-        request=FileSerializer,
-        responses=FileSerializer,
-        operation_id='Muestra un Archivo especificado',
-        description='Usado para mostrar el archivo especificado como parámetro en la URL.',
-    )
+        tags=['Comentarios'],
+        operation_id='Obtiene un comentario específico',
+        description='Usado para obtener el comentario de la tarea que recibe como parámetro en la URL, incluyendo la imagen adjunta.',
+    )     
     def get(self, request, *args, **kwargs):
+        serializer_class = CommentSerializerGet
         return self.retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        tags=['Comentarios'],
+        operation_id='Modifica un comentario específico',
+        description='Usado para modificar el comentario de la tarea que recibe como parámetro en la URL.',
+    ) 
+    def put(self, request, *args, **kwargs):
+        serializer_class = CommentSerializerPost
+        return self.update(request, *args, **kwargs)
     
-"""
+    @extend_schema(
+        tags=['Comentarios'],
+        operation_id='Modifica parcialmente un comentario específico',
+        description='Usado para modificar una parte del comentario de la tarea que recibe como parámetro en la URL.',
+    ) 
+    def patch(self, request, *args, **kwargs):
+        serializer_class = CommentSerializerPost
+        return self.partial_update(request, *args, **kwargs)
+    
+    @extend_schema(
+        tags=['Comentarios'],
+        operation_id='Elimina un comentario específico',
+        description='Usado para borrar el comentario de la tarea que recibe como parámetro en la URL.',
+    )    
+    def delete(self, request, *args, **kwargs):
+        serializer_class = CommentSerializerGet
+        instance = self.get_object()
+        if instance.is_active:
+            instance.is_active = False
+            instance.save()
+            return instance
+        else:
+            return("Comment not found")
+            
