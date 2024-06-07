@@ -11,11 +11,10 @@ class BoardSerializer(serializers.ModelSerializer):
         return Board.objects.filter(is_active=True)
         
 
-
 class BoardSerializerCreate(serializers.ModelSerializer):
     class Meta:
         model = Board
-        fields = ['board_id', 'title', 'membership_project']
+        fields = ['board_id', 'title']
 
 
     def validate_title(self, value):

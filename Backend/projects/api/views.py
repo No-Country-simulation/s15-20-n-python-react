@@ -97,6 +97,14 @@ class ProjectDetailCreateApiView(generics.RetrieveUpdateDestroyAPIView):
     def patch(self, request, *args, **kwargs):
         return super().patch(request, *args, **kwargs)
     
+
+    @extend_schema(
+        tags=['Proyectos'],
+        summary='elimina Proyecto',
+        description=(
+            'is_Active = false'
+        ),
+    )
     def delete(self, request, *args, **kwargs):
         return super().delete(request, *args, **kwargs)
     
