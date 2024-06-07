@@ -1,13 +1,17 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from tasks.serializers import TaskSerializer
 from core.models import Task
 from drf_spectacular.utils import extend_schema
+from rest_framework.response import Response
 
 # Create your views here.
 class TaskList(generics.ListCreateAPIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.AllowAny, ]
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.filter(is_active=True)
 
     @extend_schema(
         tags=['tareas'],
@@ -25,10 +29,13 @@ class TaskList(generics.ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [permissions.AllowAny]
+class TaskDetail(generics.RetrieveUpdateAPIView):
+    permission_classes = [permissions.AllowAny, ]
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.filter(is_active=True)
 
     @extend_schema(
         tags=['tareas'],
@@ -53,11 +60,22 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     )
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
+    
+class TaskInactive(generics.DestroyAPIView):
+    permission_classes = [permissions.AllowAny, ]
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        return Task.objects.filter(is_active=True)
 
     @extend_schema(
         tags=['tareas'],
         operation_id='borrar tarea',
-        description='Se elimina una tarea',
+        description='Se marca una tarea como inactiva en lugar de eliminarla',
     )
     def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+        task = self.get_object()
+        task.is_active = False
+        task.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
