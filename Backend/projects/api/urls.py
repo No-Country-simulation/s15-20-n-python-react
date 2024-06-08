@@ -1,14 +1,8 @@
 
 from django.urls import path
-from projects.api.views import ProjectCreateView, ProjectUpdateView, ProjectDetailView, ProjectListView ,  ProjectDeleteView 
-
+#from projects.api.views import ProjectCreateView, ProjectUpdateView, ProjectDetailView, ProjectListView ,  ProjectDeleteView , ProjectListApi
+from projects.api.views import ProjectListCreateApiView , ProjectDetailCreateApiView
 urlpatterns = [
-    path('', ProjectListView.as_view(), name='project-list'), #ok
-    path('status/<str:status>/', ProjectListView.as_view(), name='project-list'), #ok
-    path('create/', ProjectCreateView.as_view(), name='project-create'), #ok
-    path('<int:pk>/', ProjectDetailView.as_view(), name='project-detail'),# ok
-    path('<int:pk>/update/', ProjectUpdateView.as_view(), name='project-update'), #ok
-    path('<int:pk>/delete/', ProjectDeleteView.as_view(), name='project-delete'), #ok
+    path('',ProjectListCreateApiView.as_view(), name = 'project_list' ),
+    path('<int:pk>/',ProjectDetailCreateApiView.as_view(), name = 'project_detail' ),
 ]
-
-

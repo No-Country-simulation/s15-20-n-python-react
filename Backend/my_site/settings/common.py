@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'core',
     'projects',
-    'files',
+    'tasks',
     
     # 3rd party apps
     'rest_framework',
