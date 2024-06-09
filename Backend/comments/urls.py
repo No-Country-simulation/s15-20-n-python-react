@@ -3,7 +3,6 @@ from comments.views import CommentAPIView, CommentDetailAPIView
 
 
 urlpatterns = [
-    path('list/', CommentAPIView.as_view(), name='comments_list'),
-    path('create/', CommentAPIView.as_view(), name='comment_create'),
-    path('detail/<int:pk>/', CommentDetailAPIView.as_view(), name='comment_detail'),
+    path('<int:project_id>/boards/<int:board_id>/taskslists/<int:list_id>/tasks/<int:task_id>/comments/', CommentAPIView.as_view(), name='comments_list'),
+    path('<int:project_id>/boards/<int:board_id>/taskslists/<int:list_id>/tasks/<int:task_id>/comments/<int:pk>/', CommentDetailAPIView.as_view(), name='comment_detail'),
 ]

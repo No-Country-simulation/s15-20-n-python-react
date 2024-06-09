@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from comments.serializers import CommentSerializerGet, CommentSerializerPost
-from core.models import Comment, Task
+from core.models import Comment, Task, Board, Project
 from drf_spectacular.utils import extend_schema
 from cloudinary import uploader
 from cloudinary import api
@@ -29,11 +29,20 @@ class CommentAPIView(generics.ListCreateAPIView):
         
     def perform_create(self, serializer):
         
+        project = Project.objects.get(self.request.project_id)
+        board = Board.objects.get(self.request.board_id)
+        task = Task.objects.get(self.request.task_id)
+        
+        user = project.propietary
+        project_name = project.name
+        board_name = board.title
+        task_name = task.title
+        
         if self.request.file:
             file = self.request.file
             file_uploaded = uploader.upload(
             file,
-            folder='PML',
+            folder=f'PML/{user}/{project_name}/{board_name}/{task_name}',
             resource_type = 'image',
             use_filename = True
             )
