@@ -78,6 +78,18 @@ class Collaborator(models.Model):
 
 
 class Project(models.Model):
+    PLANNING = 'Planning'
+    IN_PROGRESS = 'In_progress'
+    COMPLETED = 'Completed'
+    CANCELLED = 'Cancelled'
+
+    STATUS_CHOICES = [
+        (PLANNING, 'Planning'),
+        (IN_PROGRESS, 'In_progress'),
+        (COMPLETED, 'Completed'),
+        (CANCELLED, 'Cancelled')
+    ]
+
     project_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     teams = models.ManyToManyField(Team)
@@ -151,7 +163,8 @@ class Task(models.Model):
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text_comment = models.TextField(max_length=500)
+    text_comment = models.TextField(max_length=500, blank=True, null=True)
+    file_link = models.CharField(max_length=300, blank=True, null=True)
     commented_task = models.ForeignKey(Task, on_delete=models.CASCADE)
     status = models.CharField(max_length=100, null=True)
     is_active = models.BooleanField(default=True)

@@ -23,6 +23,8 @@ urlpatterns = [
     path('health/', include('health.urls')),
     path('user/', include('users.urls')),
     path('team/', include('teams.urls')),
+    path('projects/',include('projects.api.urls')),
+    path('projects/',include('board.api.urls')),
     # DRF-Spectacular path
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:
