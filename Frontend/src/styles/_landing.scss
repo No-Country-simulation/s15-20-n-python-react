@@ -1,0 +1,307 @@
+@use "./variables" as var;
+// ######## Landing ########
+.Landing {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+// ######## Landing -- Header ########
+.lHeader {
+  width: 90%;
+  padding: 47px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var.$black;
+
+  &__Logo, &__Nav {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__Logo {
+    display: flex;
+    align-items: center;
+    img {
+      width: 60px;
+      height: auto;
+    }
+    div p {
+      margin-left: 12px;
+      margin-bottom: 0;
+      line-height: 20px;
+      text-shadow: 0 0 1px black;
+      .pLogo {color: #F4CA8D;}
+      .mLogo {color: #344054;}
+      span {font-weight: 600;}
+    }
+  }
+
+  &__Nav {
+    &--SignUp {
+      background-color: var.$black;
+      color: var.$white;
+      padding: 12px 24px;
+      margin-left: 24px;
+      border-radius: 8px;
+    }
+  }
+}
+
+.lSection1 {
+  width: 60%;
+  text-align: center;
+  padding: 92px 0;
+  h1 {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 58px;
+    margin-bottom: 24px;
+  }
+  p {
+    font-size: 24px;
+    font-weight: 400;
+    color: #828282;
+    margin-bottom: 24px;
+
+  }
+  button {
+    background-color: var.$black;
+    a {
+      color: var.$white;
+    }
+    padding: 12px 24px;
+    margin-left: 24px;
+    border-radius: 8px;
+    border: none;
+  }
+
+}
+
+.lSection2 {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 120px;
+
+  div {
+    width: 50%;
+    padding: 72px;
+    padding-bottom: 0;
+    h2 {
+      font-size: 40px;
+      margin-bottom: 24px;
+    }
+    p {
+      color: #828282;
+      font-size: 24px;
+      font-weight: 400;      
+    }
+  }
+
+  img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+  }
+}
+
+.flex-reverse {
+  flex-direction: row-reverse;
+}
+
+.lSection3 {
+  width: 90%;
+  margin-bottom: 120px;
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 36px;
+  }
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    div {
+      width: calc(50% - 24px);
+      h3 {
+        font-size: 24px;
+        margin: 12px 0;
+      }
+      p {
+        color: #828282;
+        font-size: 20px;
+        font-weight: 500;
+        width: 80%;
+      }
+    }
+  }
+}
+
+.lSection4 {
+  width: 60%;
+  text-align: center;
+  padding: 72px 0;
+  h2 {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  p {
+    font-size: 24px;
+    font-weight: 400;
+    color: #828282;
+    margin-bottom: 24px;
+
+  }
+  button {
+    background-color: var.$black;
+    padding: 12px 24px;
+    margin-left: 24px;
+    border-radius: 8px;
+    border: none;
+    a {
+      color: var.$white;
+    }
+  }
+}
+
+.lSection5 {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+  margin-bottom: 160px;
+
+  &__Contacto {
+    width: 50%;
+    &--Titulo {
+      font-size: 64px;
+      font-weight: 700;
+    }
+    &--Subtitulo {
+      font-size: 24px;
+      font-weight: 400;
+      color: #828282;
+      margin-bottom: 32px;
+    }
+    &__Group1 {
+      display: flex;
+      width: 100%;
+
+      .form--group {
+        width: 49%;
+        label {
+          font-weight: 500;
+          color: var.$black;
+        }
+
+        &:first-child {
+          margin-right: 12px;
+        }
+      }
+    }
+    &__Group2 {
+      width: 100%;
+      label {
+        font-weight: 500;
+        color: var.$black;
+      }
+    }
+    &__Group3 {
+      width: 100%;
+      label {
+        font-weight: 500;
+        color: var.$black;
+      }
+      textarea {
+        width: 100%;
+        height: 120px;
+        margin-top: 12px;
+        padding: 14px 17px;
+        border: 1px solid #34405446;
+        border-radius: 10px;
+      }
+    }
+    &--button {
+      width: 100%;
+      height: 48px;
+      border-radius: 8px;
+      background: var.$black;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      color: var.$white;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.54px;
+      margin-top: 24px;
+    }
+  }
+
+  &--Imagen {
+    width: 38%;
+    height: auto;
+    background-image: url("../assets/img/contacto.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+  }
+  
+}
+
+
+.lFooter {
+  width: 100%;
+  background: #F6F6F6;
+  padding: 62px 60px 32px 60px;
+  display: flex;
+  justify-content: space-between;
+
+  .lHeader__Logo {
+    margin-bottom: 40px;
+  }
+
+  &__cont1 {
+    p {
+      font-size: 24px;
+      font-weight: 400;
+    }
+    ul {
+      display: flex;
+      li {
+        margin-right: 12px;
+      }
+    }
+    .lFooter__redes {
+      p {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  &__cont2 {
+    display: flex;
+    padding-right: 60px;
+    gap: 24px 48px;
+
+    &__items {
+      p {
+        color: #454545;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      ul li {
+        color: #454545;
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 12px; 
+      }
+    }
+  }
+}
