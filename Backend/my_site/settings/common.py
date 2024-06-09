@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'lists',
     'comments',
     'tasks',
+    'teams',
     
     # 3rd party apps
     'rest_framework',
