@@ -30,11 +30,13 @@ INSTALLED_APPS = [
     # Local apps
     'health.apps.HealthConfig',
     'users.apps.UsersConfig',
+    'core',
 
     # 3rd party apps
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -126,5 +128,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
         ['rest_framework.authentication.TokenAuthentication'],
     'DEFAULT_PERMISSION_CLASSES':
-        ['rest_framework.permissions.IsAdminUser']
+        ['rest_framework.permissions.AllowAny'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Project Manager Latam API',
+    'DESCRIPTION': 'API for manage server side of PML',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }

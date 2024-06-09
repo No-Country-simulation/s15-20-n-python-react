@@ -7,7 +7,7 @@ from health.models import HealthTest
 
 class HealthListViewTests(APITestCase):
     def setUp(self):
-        self.health_test = HealthTest.objects.create(message='Test message')
+        HealthTest.objects.create(message='Test message')
 
     def test_index_returns_http_response(self):
         request = self.client.get('/health/')
