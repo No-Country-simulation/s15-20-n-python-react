@@ -31,7 +31,9 @@ INSTALLED_APPS = [
     'health.apps.HealthConfig',
     'users.apps.UsersConfig',
     'core',
-
+    'projects',
+    'tasks',
+    
     # 3rd party apps
     'rest_framework',
     'corsheaders',
@@ -120,7 +122,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+"""
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -129,6 +131,27 @@ REST_FRAMEWORK = {
         ['rest_framework.authentication.TokenAuthentication'],
     'DEFAULT_PERMISSION_CLASSES':
         ['rest_framework.permissions.AllowAny'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Project Manager Latam API',
+    'DESCRIPTION': 'API for manage server side of PML',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+"""
+####ESTO LO ESTOY MODIFICANDO PARA PODER INGRESAR A LAS RUTAS SIN AUTENTICACION
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
