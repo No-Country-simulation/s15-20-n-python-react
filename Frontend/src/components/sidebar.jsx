@@ -2,7 +2,7 @@ import { Menu } from "./menu"
 
 export const Sidebar = () => {
     return (
-        <aside className="header z-0 w-2/12 h-svh absolute top-0 flex flex-col items-center">
+        <aside className="bg-gray-900 text-white w-64 h-full flex flex-col items-center">
             <div className="flex flex-col gap-4 my-4">
                 <img width={50} height={50} src="../src/assets/img/logo-pml.png" alt="" />
                 <img width={50} height={50} src="../src/assets/img/PML.png" alt="" />
