@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 
+from projects.api.serializer import ProjectSerializerCreate
+
 # Instance of User model
 User = get_user_model()
 
@@ -10,9 +12,11 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    projects = ProjectSerializerCreate(many=True)
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', ]
+        fields = ['username', 'email', 'password', 'projects']
         extra_kwargs = {'password': {'write_only': True}, }
 
     def create(self, validated_data):

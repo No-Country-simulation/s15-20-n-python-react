@@ -3,6 +3,7 @@ from users.serializers import UserSerializer
 from rest_framework import generics, permissions
 from drf_spectacular.utils import extend_schema
 from rest_framework_simplejwt.views import TokenObtainPairView
+from projects.api.serializer import ProjectSerializerCreate
 
 # Instance of User model
 User = get_user_model()
@@ -11,6 +12,7 @@ User = get_user_model()
 
 
 class UserList(generics.ListCreateAPIView):
+    projects = ProjectSerializerCreate(many=True)
     serializer_class = UserSerializer
     queryset = User.objects.all()
 

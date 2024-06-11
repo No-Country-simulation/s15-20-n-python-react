@@ -93,7 +93,8 @@ class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     teams = models.ManyToManyField(Team)
-    propietary = models.ForeignKey(User, on_delete=models.CASCADE)
+    propietary = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='projects')
     collabs = models.ManyToManyField(Collaborator)
     status = models.CharField(max_length=100, null=True)
     is_active = models.BooleanField(default=True)
