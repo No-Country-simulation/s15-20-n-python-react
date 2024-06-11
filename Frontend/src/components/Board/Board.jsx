@@ -1,7 +1,6 @@
 // Board.js
-import React from 'react';
-import Colum from './Colum';
-import Card from '../Card/card';
+import Colum from "./Colum";
+import Card from "../Card/card";
 
 const Board = () => {
   return (
@@ -56,6 +55,6 @@ const Board = () => {
       </Colum>
     </div>
   );
-}
+};
 
 export default Board;
