@@ -27,6 +27,7 @@ urlpatterns = [
     path('projects/',include('projects.api.urls')),
     path('projects/',include('board.api.urls')),
     path('genericApi/',UserProjectsApiView.as_view(), name='user-projects'),
+    path('tasks/',include('tasks.urls')),
     # DRF-Spectacular path
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:

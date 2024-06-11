@@ -1,11 +1,11 @@
 from rest_framework import generics, permissions
 from core.models import Project
 
-from genericApi.serializer import ProjectSerializer
+from genericApi.serializer import ProjectSerializerAPI
 from rest_framework.response import Response
 
 class UserProjectsApiView(generics.GenericAPIView):
-    serializer_class = ProjectSerializer
+    serializer_class = ProjectSerializerAPI
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
