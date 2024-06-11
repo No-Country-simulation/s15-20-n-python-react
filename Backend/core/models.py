@@ -49,7 +49,7 @@ class Team(models.Model):
     team_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     members = models.ManyToManyField(User)
-    status = models.CharField(max_length=100, null=True)
+    status = models.CharField(max_length=100, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
