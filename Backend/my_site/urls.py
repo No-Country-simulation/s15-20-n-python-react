@@ -17,17 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from genericApi.views import UserProjectsApiView
 
 
 urlpatterns = [
     path('health/', include('health.urls')),
     path('user/', include('users.urls')),
     path('team/', include('teams.urls')),
-    path('projects/',include('projects.api.urls')),
-    path('projects/',include('board.api.urls')),
-    path('projects/',include('lists.api.urls')),
-    path('projects/',include('tasks.urls')),
-    path('projects/',include('comments.urls')),
+    path('projects/', include('projects.api.urls')),
+    path('projects/', include('board.api.urls')),
+    path('projects/', include('lists.api.urls')),
+    path('projects/', include('tasks.urls')),
+    path('projects/', include('comments.urls')),
+    path('genericApi/', UserProjectsApiView.as_view(), name='user-projects'),
+    path('tasks/', include('tasks.urls')),
     # DRF-Spectacular path
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:
