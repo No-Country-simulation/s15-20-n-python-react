@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,13 +34,18 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'core',
     'projects',
+    'board',
+    'lists',
+    'comments',
     'tasks',
+    'teams',
     
     # 3rd party apps
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
     'drf_spectacular',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +169,10 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
 }
+
+cloudinary.config( 
+  cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'), 
+  api_key = os.environ.get('CLOUDINARY_API_KEY'), 
+  api_secret = os.environ.get('CLOUDINARY_API_SECRET'),
+  secure = True
+)
